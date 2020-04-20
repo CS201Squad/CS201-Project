@@ -1,0 +1,451 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link type="text/css" rel="stylesheet" href="style.css" />
+    <meta name="Description" content="rateSC profile page" />
+
+
+</head>
+
+<style>
+        html {
+        font-family: Montserrat;
+    }
+
+    h2 {
+        margin-left: 3%;
+        margin-bottom: 5%;
+    }
+
+    .fb-header-base {
+        width: 100%;
+        height: 60px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: white;
+        z-index: 7;
+        -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+    }
+
+    #home {
+        display: block;
+        margin-top: 5px;
+        width: 130px;
+        height: 40px;
+        left: 50px;
+        background-color: #990000;
+        color: white;
+    }
+
+    .fb-header {
+        width: 100%;
+        height: 60px;
+        position: absolute;
+        background: #990000;
+        top: 0;
+        left: 0;
+        color: white;
+        z-index: 12;
+
+    }
+    .top-bar{
+      width: 100%;
+      height: 60px;
+      position: fixed;
+    }
+    #img1 {
+        left: 38px;
+        height: 30px;
+        width: 300px;
+        top: 5px;
+        color: white;
+        font-size: 30px;
+    }
+
+    #img2 {
+        left: 90px;
+        height: 30px;
+        width: 300px;
+        top: 5px;
+        color: #FFCC00;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    #search {
+       
+        border-radius: 8px;
+        border: none;
+        left: 25%;
+        height: 45%;
+        width: 30%;
+        top: 25%;
+        background: #7a190c;
+        color: #white;
+        font-size: 15px;
+        
+    }
+
+    #search-btn{
+        border-radius: 14px;
+        border: 1px solid white;
+        left: 56%;
+        height: 50%;
+        width: 6%;
+        top: 25%;
+        color: white;
+        font-size: 12px;
+    }
+    #search-btn:hover {
+        border-radius: 14px;
+        border: none;
+        left: 56%;
+        height: 50%;
+        width: 6%;
+        top: 25%;
+        color: white;
+        background: #7a190c;
+        font-size: 12px;
+    }
+    #search-btn2{
+        border-radius: 14px;
+        border: 1px solid white;
+        left: 63%;
+        height: 50%;
+        width: 6%;
+        top: 25%;
+        color: white;
+        font-size: 12px;
+    }
+    #search-btn2:hover {
+      border-radius: 14px;
+      border: none;
+      left: 63%;
+      height: 50%;
+      width: 6%;
+      top: 25%;
+      color: white;
+      background: #7a190c;
+      font-size: 12px;
+    }
+    #btn-topright {
+        border-radius: 8px;
+        border: 0.8px solid white;
+        left: 81%;
+        height: 50%;
+        width: 8%;
+        top: 25%;
+        text-align: center;
+        color: white;
+        font-size: 12px;
+    }
+
+
+    #btn-topright:hover {
+        border-radius: 8px;
+        border: none;
+        left: 81%;
+        height: 50%;
+        width: 8%;
+        top: 25%;
+        text-align: center;
+        background: #7a190c;
+        font-size: 12px;
+    }
+    #btn-topright2 {
+        border-radius: 8px;
+        border: 0.8px solid white;
+        left: 90%;
+        height: 50%;
+        width: 8%;
+        top: 25%;
+        color: white;
+        font-size: 12px;
+    }
+
+    #btn-topright2:hover {
+        border-radius: 8px;
+        border: 0.8px none;
+        left: 90%;
+        height: 50%;
+        width: 8%;
+        top: 25%;
+        text-align: center;
+        background: #7a190c;
+        font-size: 12px;
+    }
+
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    #photo{
+        margin-top: 4%;
+    }
+    .left {
+        width: 30%;
+        padding-left: 6%;
+        padding-top: 8%;
+        height: 60px;
+        width: 300px;
+        bottom: 80px;
+        align-content:center;
+        color: hsl(0, 100%, 30%);
+    }
+
+    .right {
+        width: 80%;
+        padding-left: 10%;
+        padding-top: 8%;
+        height: 95%;
+        width: 70%;
+        bottom: 100%;
+        color: #990000;
+        margin-bottom: 4%;
+        background-position: right;
+        background-origin: padding-box;
+    }
+    .example1 {
+        
+        border-radius: 8px;
+        border: none;
+        padding: 25px;
+        width: 95%;
+        background: rgb(235, 233, 233);
+        background-repeat: no-repeat;
+        height: 95%;
+        background-origin: padding-box;
+}
+    .form2 {
+        padding-left: 4%;
+        padding-top: 10%;
+        height: 60px;
+        width: 250px;
+        color: #990000;
+
+
+    }
+    #charthead {
+        background-color: ivory;
+    }
+    #photo {
+        border-radius: 10px;
+        margin-top: 10%;
+        margin-bottom: 4%;
+        display: block;
+        max-width:150px;
+        max-height:150px;
+        width: auto;
+        height: auto;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    }
+</style>
+
+<body>
+
+    <div class="fb-header-base">
+    </div>
+    <div class="fb-header">
+        <!-- Here location should be changed to the home page -->
+        <ul id="home" onclick="location.href='../www.google.com';" style="cursor: pointer;">
+            <a id="img1" class="fb-header">rate</a>
+            <a id="img2" class="fb-header">sc</a>
+
+        </ul>
+        <form>
+            <!-- Here search button and add review and sign out should be made dynamic -->
+            <input class="fb-header" id="search" placeholder="" aria-label="Search">
+            <input class="fb-header" id="search-btn" class=button type="submit" name="courses" value="Courses"/>
+			<input class="fb-header" id="search-btn2" class=button type="submit" name="professors" value="Professors"/>
+            <button class="fb-header" id="btn-topright">Add Review</button>
+            <button class="fb-header" id="btn-topright2">Sign Out</button>
+        </form>
+
+
+
+    </div>
+    <div class="content">
+    </div>
+    <div class="row">
+        <div class="left">
+            <div id="profile-base">
+            </div>
+            <h2>My Profile</h2>
+            <!-- Here student photo should be changed (Add photo when signing up?) -->
+            <img id="photo" alt="Student Image Preview" src="https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/whfpf%3D700%2C700%2C0/sign=806d38f1f21986184112bcc42cd01943/f9dcd100baa1cd1141fdcfb0b312c8fcc2ce2dd2.jpg">
+            <!-- Load student profile information here from SQL database -->
+            <div class = "table">
+                <dl class = "left">
+
+                    <dt>
+                        Name
+                    </dt>
+                    <dd>
+                        Xueyou Zhang
+                    </dd>
+                    <dt>
+                        Email
+                    </dt>
+                    <dd>
+                        xueyou.zhang@usc.edu
+                    </dd>
+                    <dt>
+                        Major
+                    </dt>
+                    <dd>
+                        Accounting
+                    </dd>
+                </dl>
+            </div>
+            
+
+        </div>
+    <div class = "right">
+        <h2 >My Rated Courses</h2>
+        <div class = "example1">
+            <!-- Load past reviews here from SQL database -->
+            <table class="table">
+				<thead>
+					<tr id = "charthead">
+						<th>
+							#
+						</th>
+						<th>
+							Course No
+						</th>
+						<th>
+							Course Name
+						</th>
+						<th>
+							Year
+						</th>
+						<th>
+							Professor
+						</th>
+						<th>
+							Scores
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							1
+						</td>
+						<td>
+							CSCI1001
+						</td>
+						<td>
+							Introduction to Computer Systems
+						</td>
+						<td>
+							2019/05
+						</td>
+						<td>
+							Jeffery Miller
+						</td>
+						<td>
+							4.2
+						</td>
+					</tr>
+					<tr class="table-active">
+						<td>
+							2
+						</td>
+						<td>
+							CSCI1005
+						</td>
+						<td>
+							Introduction to Algorithms and Data Structures
+						</td>
+						<td>
+							2018/03
+						</td>
+						<td>
+							Tim Nelson
+						</td>
+						<td>
+							3.9
+						</td>
+					</tr>
+					<tr class="table-success">
+						<td>
+							3
+						</td>
+						<td>
+							CSCI1020
+						</td>
+						<td>
+							Database Management Systems
+						</td>
+						<td>
+							2019/09
+						</td>
+						<td>
+							Doug Woos
+						</td>
+						<td>
+							4.5
+						</td>
+					</tr>
+					<tr class="table-warning">
+						<td>
+							4
+						</td>
+						<td>
+							CSCI1348
+						</td>
+						<td>
+							Compilers and Program Analysis
+						</td>
+						<td>
+							2019/10
+						</td>
+						<td>
+							Jeff Huang
+						</td>
+						<td>
+							4.9
+						</td>
+					</tr>
+					<tr class="table-danger">
+						<td>
+							5
+						</td>
+						<td>
+							CSCI2460
+						</td>
+						<td>
+							Machine Learning 
+						</td>
+						<td>
+							20120/02
+						</td>
+						<td>
+							Thomas W
+						</td>
+						<td>
+							4.1
+						</td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+        
+    </div>
+
+
+
+
+</body>
+
+</html>

@@ -20,6 +20,7 @@
 
     h2 {
         margin-left: 3%;
+        text-align: center;
         margin-bottom: 5%;
     }
 
@@ -181,37 +182,26 @@
         background: #7a190c;
         font-size: 12px;
     }
-
     .row:after {
         content: "";
         display: table;
         clear: both;
     }
-    #photo{
-        margin-top: 4%;
-    }
-    .left {
-        width: 30%;
-        padding-left: 6%;
-        padding-top: 8%;
-        height: 60px;
-        width: 300px;
-        bottom: 80px;
-        align-content:center;
-        color: hsl(0, 100%, 30%);
-    }
 
     .right {
-        width: 80%;
-        padding-left: 10%;
+        width: 100%;
+        padding-left: 15%;
+        padding-right: 15%;
         padding-top: 8%;
         height: 95%;
-        width: 70%;
         bottom: 100%;
         color: #990000;
         margin-bottom: 4%;
         background-position: right;
         background-origin: padding-box;
+    }
+    #headline{
+        margin-right:5%;
     }
     .example1 {
         
@@ -236,18 +226,7 @@
     #charthead {
         background-color: ivory;
     }
-    #photo {
-        border-radius: 10px;
-        margin-top: 10%;
-        margin-bottom: 4%;
-        display: block;
-        max-width:150px;
-        max-height:150px;
-        width: auto;
-        height: auto;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-    }
+    
 </style>
 
 <body>
@@ -276,41 +255,9 @@
     <div class="content">
     </div>
     <div class="row">
-        <div class="left">
-            <div id="profile-base">
-            </div>
-            <h2>My Profile</h2>
-            <!-- Here student photo should be changed (Add photo when signing up?) -->
-            <img id="photo" alt="Student Image Preview" src="https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/whfpf%3D700%2C700%2C0/sign=806d38f1f21986184112bcc42cd01943/f9dcd100baa1cd1141fdcfb0b312c8fcc2ce2dd2.jpg">
-            <!-- Load student profile information here from SQL database -->
-            <div class = "table">
-                <dl class = "left">
-
-                    <dt>
-                        Name
-                    </dt>
-                    <dd>
-                        Xueyou Zhang
-                    </dd>
-                    <dt>
-                        Email
-                    </dt>
-                    <dd>
-                        xueyou.zhang@usc.edu
-                    </dd>
-                    <dt>
-                        Major
-                    </dt>
-                    <dd>
-                        Accounting
-                    </dd>
-                </dl>
-            </div>
-            
-
-        </div>
+        
     <div class = "right">
-        <h2 >My Rated Courses</h2>
+        <h2 id="headline" >My Past Reviews </h2>
         <div class = "example1">
             <!-- Load past reviews here from SQL database -->
             <table class="table">

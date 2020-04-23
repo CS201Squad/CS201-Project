@@ -3,9 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>write review</title>
-	<link rel="stylesheet" type="text/css" href="writereviews.css">
 	<link rel="stylesheet" type="text/css" href="topbar.css">
 	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
 	<script src="Chart.js"></script>
 
 	<!-- <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'> -->
@@ -56,7 +57,7 @@
 	/* Jeffrey Miller */
 	.instructor-name{
 		position: absolute;
-		width: 996px;
+		width: auto;
 		height: 50px;
 		left: 334px;
 		top: 200px;
@@ -244,6 +245,7 @@ background: #E7E7E7;
 </style>
 </head>
 <body>
+	<!-- bar -->
 	<div class="fb-header-base">
 	</div>
 	<div class="fb-header">
@@ -257,11 +259,11 @@ background: #E7E7E7;
 			<button class="fb-header" id="search-btn">Professors</button> -->
 			<input class="fb-header" id="search-btn" class=button type="submit" name="courses" value="Courses"/>
 			<input class="fb-header" id="search-btn2" class=button type="submit" name="professors" value="Professors"/>
-			<button class="fb-header" id="btn-topright">Add Review</button>
+			<button class="fb-header" id="btn-topright">My Profile</button>
 			<button class="fb-header" id="btn-topright2">Sign Out</button>
 		</form>
 	</div>
-	<!-- bar -->
+	<!-- end of bar -->
 
 	<div class="course-box">
 		<div class="course-id">CSCI 201</div>
@@ -269,10 +271,15 @@ background: #E7E7E7;
 	<div class="course-title">
 		Software Engineering
 	</div>
-	<!-- TODO -->
 	<a href="https://www.google.com" class="instructor-name" style="text-decoration: none;">
 		Jeffrey Miller
 	</a>
+	<div style="margin-left: 1000px; margin-top: 140px;">
+        <!-- <div class="col-md-12"> -->
+            <button type="button" class="btn btn-primary" style="background-color: #990000; border-color: #990000">Add Review</button>
+        <!-- </div> -->
+    </div>
+
 	<div class="chart1">
 		<div class="title">Ratings</div>
 		<canvas id="myChart" style="display: block; height: 326px; width: 300px;"></canvas>
@@ -334,9 +341,10 @@ background: #E7E7E7;
 		});
 	</script>
 	</div>
+
 	<div class="review-section">
-		<a div class="seemore" href="https://www.google.com" style="text-decoration: none;">   See More >> </a>
 		<div class="review">Reviews</div>
+		<a class="seemore" href="https://www.google.com" > See More >> </button>
 		<a href="https://www.google.com">
 			<div class="review-box1"></div>
 			<div class="review-text1">Great class, great professor!</div>

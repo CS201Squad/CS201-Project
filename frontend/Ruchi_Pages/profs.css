@@ -140,7 +140,7 @@
 /*---------------------------------------------------------------------*/
 
 #resultBox {
-    width: auto;
+    width: 92%;
     height: 215px;  
     background-color: lightgrey;
     border-radius: 10px;
@@ -200,6 +200,31 @@
     margin-left: 550px;
     margin-top: 80px;
 }
+
+#class2 {
+    float: left;
+    font-size: 20px;
+    margin-left: 4.5%;    
+    margin-top: 25px;
+}
+
+#rate2 {
+    float: left;
+    font-size: 20px;
+    margin-left: 42%;
+    margin-top: 25px;
+}
+
+#class3 {
+    float: left;
+    font-size: 20px; 
+    margin-left: 60px;
+    margin-top: 25px; 
+}
+
+
+
+
 
 
 

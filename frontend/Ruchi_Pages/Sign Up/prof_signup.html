@@ -16,12 +16,12 @@ body {
 		<form name="profsignupform" method="post" action="ProfSignupServlet"> 
 		<ul class="list">
 			<li>rate<span style='color: #F2C94C'><b>sc</b></span></li>
-			<li><input type ="number" name="id" placeholder="usc id number"></li>
-			<li><input type ="name" name="first name" placeholder="first name"></li>
-			<li><input type ="name" name="last name" placeholder="last name"></li>
-			<li><input type ="email" name="email" placeholder="email"></li>
-			<li><input type ="password" name="password" placeholder="password"></li>
-			<li><input type ="submit" name="sign up" value="sign up"></li>
+			<li><input type ="number" name="id" placeholder="usc id number" required></li>
+			<li><input type ="name" name="first name" placeholder="first name" required></li>
+			<li><input type ="name" name="last name" placeholder="last name" required></li>
+			<li><input type ="email" name="email" placeholder="email" required></li>
+			<li><input type ="password" name="password" placeholder="password" required></li>
+			<li><input type ="submit" name="sign up" value="sign up" required></li>
 		</ul>
 </div>
 </body>

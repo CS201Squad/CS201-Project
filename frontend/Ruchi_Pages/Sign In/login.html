@@ -17,20 +17,23 @@ body {
 </style>
 </head>
 <body>
-<div class="form-container">
-	<form name="loginform" method="post" action="Login">
-		<ul class="list">
-			<li>rate<span style='color: #F2C94C'><b>sc</b></span></li>
-			<li><input type ="email" name="email" placeholder="email"></li>
-			<li><input type ="password" name="password" placeholder="password"></li>
-			<li><input type ="submit" name="sign in" value="sign in"></li>
-		</ul>
-	</form>
-</div>
-<div class="links" style="color:darkgrey">
-	<a href="student_signup.html">Student Sign Up</a>
-	<div class="vl"></div>
-	<a href="prof_signup.html"> Professor Sign Up</a>
+<div class="full-container">
+	<div class="form-container">
+		<form name="loginform" method="post" action="Login">
+			<ul class="list">
+				<li>rate<span style='color: #F2C94C'><b>sc</b></span></li>
+				<li><input type ="email" name="email" placeholder="email" required></li>
+				<li><input type ="password" name="password" placeholder="password" required></li>
+				<li><input type ="submit" name="sign in" value="sign in" required></li>
+			</ul>
+		</form>
+
+	</div>
+	<div class="links" style="color:darkgrey; align-items: center; align-content: center; align-self: center;"> 
+		<a href="student_signup.html">Student Sign Up</a>
+		<div class="vl"></div>
+		<a href="prof_signup.html"> Professor Sign Up</a>
+	</div> 
 </div>
 </body>
 </html>

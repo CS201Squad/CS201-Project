@@ -5,15 +5,28 @@ body{
 }
 
 .form-container {
-	width: 250px;
-	height: auto;
-	padding: 20px 30px;
+	/* width: 250px;
+	height: auto;*/
+	padding: 20px 30px; 
 	background-color: #A30101;
 	border-radius: 10px;
+	/*position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%); */
+}
+
+.full-container {
+	width:  310px;
+	height: auto;
+	/* padding: 20px 30px; */
+	/* background-color: #A30101; */
+	/*border-radius: 10px;*/
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	align-items: center;
 }
 
 ul.list{
@@ -61,10 +74,7 @@ a:hover, a:active, a:focus {
 }
 
 .links {
-	margin-top: 55vh;
-	margin-left: 40%;
+	margin: 0 10%;
+	display: flex;
+	justify-content: space-around;
 }
-
-
-
-

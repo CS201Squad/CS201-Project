@@ -24,19 +24,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
+
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/CourseProfessorResult")
-
-public class CourseProfessorResult extends HttpServlet {
+@WebServlet("/ADRedirect")
+public class ADRedirect extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static SecureRandom random = new SecureRandom();
 	private static byte[] salt;
 	
-	
-    public CourseProfessorResult() {
+    public ADRedirect() {
         super();
     }
 
@@ -53,8 +51,8 @@ public class CourseProfessorResult extends HttpServlet {
 		}
 		CourseProfessor cp=new CourseProfessor(request.getParameter("pre"), Integer.parseInt(request.getParameter("num")), Integer.parseInt(request.getParameter("pid")));
 		request.setAttribute("cp", cp);
-		RequestDispatcher dispatcher =request.getRequestDispatcher("Julie_Pages/classProfessor.jsp");
-        dispatcher.forward(request, response);	
+		RequestDispatcher dispatcher =request.getRequestDispatcher("Ruchi_Pages/writeReviews.jsp");
+        dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

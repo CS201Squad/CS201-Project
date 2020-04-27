@@ -50,13 +50,15 @@ public class Login extends HttpServlet {
 
 		if(x) {
 			if((boolean)sess.getAttribute("isStudent")==true) {
-				request.setAttribute("student", sess.getAttribute("student"));
-				RequestDispatcher dispatcher = request.getRequestDispatcher("Sophia's_Pages/StudentProfile.jsp");
+				request.setAttribute("s", sess.getAttribute("student"));
+				RequestDispatcher dispatcher = request.getRequestDispatcher("Julie_Pages/search.jsp");
 	            dispatcher.forward(request, response);	
 			}
 			//send them to the next page
 			else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("Sophia's_Pages/ProfessorProfile.jsp");
+				Professor p=(Professor)sess.getAttribute("professor");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("ProfessorProfile?pid="+
+						Integer.toString(p.get_professorID()));
 				dispatcher.forward(request, response);	
 			}
 		}
@@ -104,18 +106,22 @@ public class Login extends HttpServlet {
 			
 			ps = null;
 			rs = null;
-			ps = conn.prepareStatement("SELECT professorID FROM Professor "
+			ps = conn.prepareStatement("SELECT professorID FROM professor "
+					+ "WHERE password_hash='" + hashed +"' AND email='" + email + "';");
+			System.out.println("SELECT professorID FROM professor "
 					+ "WHERE password_hash='" + hashed +"' AND email='" + email + "';");
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				Integer ID = rs.getInt("professorID");
 				if(ID != null) {
+					System.out.println(email);
 					access = true;
 					Professor p=new Professor(rs.getInt("professorID"));
 					HttpSession session=request.getSession();
 					session.setAttribute("professor", p);
 					session.setAttribute("isStudent", false);
 					session.setAttribute("logged", true);
+					return true;
 				}
 			}	
 		} catch (SQLException sqle) {

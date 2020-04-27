@@ -45,14 +45,27 @@ public class StudentProfile extends HttpServlet {
 		// TODO Auto-generated method stub
 		//ADD ALL THE PARAMETERS AND MAKE SURE YOU MAKE THE SALT UNIVERSAL
 		HttpSession session=request.getSession();
+		if(session.getAttribute("logged")==null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login.html");
+            dispatcher.forward(request, response);	
+		}
 		if(!(boolean)session.getAttribute("logged")){
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.html");
             dispatcher.forward(request, response);
 		}
-		Student s=(Student)session.getAttribute("student");
-		request.setAttribute("Student", s);
-		RequestDispatcher dispatcher =request.getRequestDispatcher("login.html");
-        dispatcher.forward(request, response);	
+		boolean stu=(boolean)session.getAttribute("isStudent");
+		if(stu) {
+			Student s=(Student)session.getAttribute("student");
+			s.init_reviews();
+			request.setAttribute("s", s);
+			RequestDispatcher dispatcher =request.getRequestDispatcher("Sophia's_Pages/StudentProfile.jsp");
+	        dispatcher.forward(request, response);	
+		}
+		else {
+			Professor p=(Professor)session.getAttribute("professor");
+			RequestDispatcher dispatcher =request.getRequestDispatcher("ProfessorProfile?pid="+Integer.toString(p.get_professorID()));
+	        dispatcher.forward(request, response);
+		}
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

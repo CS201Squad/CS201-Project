@@ -14,8 +14,9 @@ import java.sql.PreparedStatement;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.util.ArrayList;
+import java.util.concurrent.*;
 
-public class course {
+public class course implements Runnable{
 	private Professor professor;
 	private int courseID;
 	private int courseNum;
@@ -33,7 +34,12 @@ public class course {
 	private double difficulty;
 	private int gradeID;
 	private Grades grades;
+	private String name;
+	private ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
 	
+	public String get_name() {
+		return this.name;
+	}
 	public Grades get_grades() {
 		return this.grades;
 	}
@@ -98,6 +104,7 @@ public class course {
 				this.difficulty=rs.getDouble("difficulty");
 				this.workload=rs.getDouble("workload");
 				this.gradeID=rs.getInt("gradeID");
+				this.name=rs.getString("title");
 			}
 			this.professor=new Professor(professorID);
 			this.grades=new Grades(this.gradeID);
@@ -123,6 +130,11 @@ public class course {
 		}
 	}
 	
+	public course(int ID, Professor p, boolean async) {
+		this.courseID=ID;
+		this.professor=p;
+	}
+	
 	public course(int ID, Professor p) {
 		this.courseID=ID;
 		this.professor=p;
@@ -143,6 +155,7 @@ public class course {
 				this.difficulty=rs.getDouble("difficulty");
 				this.workload=rs.getDouble("workload");
 				this.gradeID=rs.getInt("gradeId");
+				this.name=rs.getString("title");
 			}
 			this.grades=new Grades(this.gradeID);
 		} catch (SQLException sqle) {
@@ -177,8 +190,12 @@ public class course {
 					+ "WHERE courseID="+Integer.toString(courseID)+";");
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				reviews.add(new Review(rs.getInt("reviewID")));
+				Review r=new Review(rs.getInt("reviewID"),true);
+				reviews.add(r);
+				executor.execute(r);
 			}
+			executor.shutdown();
+			while(!executor.isTerminated())continue;
 		} catch (SQLException sqle) {
 			System.out.println ("SQLException: " + sqle.getMessage());
 		} catch (ClassNotFoundException e) {
@@ -189,6 +206,47 @@ public class course {
 				if (rs != null) {
 					rs.close();
 				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException sqle) {
+				System.out.println("sqle: " + sqle.getMessage());
+			}
+		}
+	}
+	
+	public void run() {
+		try {
+			String passwords = "root"; //enter the password for your MySQL
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/RateSC?serverTimezone=UTC&user=root&password="+passwords);
+			ps = conn.prepareStatement("SELECT * FROM Course "
+					+ "WHERE courseID="+Double.toString(courseID)+";");
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				this.professorID=rs.getInt("professorID");
+				this.courseID=rs.getInt("courseID");
+				this.prefix=rs.getString("prefix");
+				this.courseNum=rs.getInt("courseNum");
+				this.term=rs.getString("term");
+				this.clarity=rs.getDouble("clarity");
+				this.overall=rs.getDouble("overall");
+				this.difficulty=rs.getDouble("difficulty");
+				this.workload=rs.getDouble("workload");
+				this.gradeID=rs.getInt("gradeId");
+				this.name=rs.getString("title");
+			}
+			this.grades=new Grades(this.gradeID);
+		} catch (SQLException sqle) {
+			System.out.println ("SQLException: " + sqle.getMessage());
+		}finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				
 				if (ps != null) {
 					ps.close();
 				}

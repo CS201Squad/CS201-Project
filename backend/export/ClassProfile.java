@@ -43,10 +43,17 @@ public class ClassProfile extends HttpServlet {
 		// TODO Auto-generated method stub
 		//ADD ALL THE PARAMETERS AND MAKE SURE YOU MAKE THE SALT UNIVERSAL
 		HttpSession session=request.getSession();
+		if(session.getAttribute("logged")==null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login.html");
+            dispatcher.forward(request, response);	
+		}
 		if(!(boolean)session.getAttribute("logged")){
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.html");
             dispatcher.forward(request, response);
 		}
+		System.out.println("here");
+		System.out.flush();
+		System.out.println(request.getParameter("search"));
 		EntireCourse e=new EntireCourse((String)request.getParameter("search"));
 		request.setAttribute("entireCourse", e);
 		RequestDispatcher dispatcher =request.getRequestDispatcher("Sophia's_Pages/ClassProfile.jsp");

@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Base64;
+import java.util.Objects;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.ServletContext;
@@ -28,15 +30,15 @@ import java.util.ArrayList;
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/CourseProfessorResult")
+@WebServlet("/Search")
 
-public class CourseProfessorResult extends HttpServlet {
+public class Search extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static SecureRandom random = new SecureRandom();
 	private static byte[] salt;
 	
 	
-    public CourseProfessorResult() {
+    public Search() {
         super();
     }
 
@@ -51,10 +53,22 @@ public class CourseProfessorResult extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.html");
             dispatcher.forward(request, response);
 		}
-		CourseProfessor cp=new CourseProfessor(request.getParameter("pre"), Integer.parseInt(request.getParameter("num")), Integer.parseInt(request.getParameter("pid")));
-		request.setAttribute("cp", cp);
-		RequestDispatcher dispatcher =request.getRequestDispatcher("Julie_Pages/classProfessor.jsp");
-        dispatcher.forward(request, response);	
+		boolean course;
+		
+		if(Objects.equals(request.getParameter("searchby"),"Courses"))course=true;
+		else course=false;
+		
+		request.setAttribute("search", request.getParameter("search"));
+		
+		if(course) {
+			System.out.println("here");
+			RequestDispatcher dispatcher =request.getRequestDispatcher("ClassProfile");
+			dispatcher.forward(request, response);	
+		}
+		else {
+			RequestDispatcher dispatcher =request.getRequestDispatcher("ProfessorResult");
+			dispatcher.forward(request, response);
+		}   
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

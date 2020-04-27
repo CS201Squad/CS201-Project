@@ -26,7 +26,11 @@ public class Professor {
 	private PreparedStatement ps = null;
 	private ResultSet rs=null;
 	private HashMap<String,CourseProfessor> courses;
+	private String department;
 	
+	public String get_department() {
+		return this.department;
+	}
 	public double get_overall() {
 		double total=0;
 		double count=0;
@@ -74,6 +78,7 @@ public class Professor {
 				this.fname=rs.getString("fname");
 				this.lname=rs.getString("lname");
 				this.email=rs.getString("email");
+				this.department=rs.getString("department");
 			}
 		} catch (SQLException sqle) {
 			System.out.println ("SQLException: " + sqle.getMessage());

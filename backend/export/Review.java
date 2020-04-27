@@ -14,7 +14,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 
-public class Review {
+public class Review implements Runnable{
 	private Student student;
 	private course Course;
 	private int reviewId;
@@ -29,7 +29,19 @@ public class Review {
 	private int courseId;
 	private int studentId;
 	private ResultSet rs = null;
+	private boolean text;
+	private boolean att;
 	
+	public boolean get_text() {
+		return this.text;
+	}
+	
+	public boolean get_att() {
+		return this.att;
+	}
+	public String get_content() {
+		return this.Content;
+	}
 	public double studentID() {
 		return this.studentId;
 	}
@@ -103,9 +115,54 @@ public class Review {
 		}
 	}
 	
+	public Review(int ID, boolean async) {
+		this.reviewId=ID;
+	}
+	
 	public Review(int ID, Student s) {
 		this.student=s;
 		this.reviewId=ID;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String passwords = "root"; //enter the password for your MySQL
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/RateSC?serverTimezone=UTC&user=root&password="+passwords);
+			ps = conn.prepareStatement("SELECT * FROM Review "
+					+ "WHERE reviewID="+Double.toString(reviewId)+";");
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				this.overall=rs.getDouble("overall");
+				this.difficulty=rs.getDouble("overall");
+				this.clarity=rs.getDouble("overall");
+				this.workload=rs.getDouble("workload");	
+				this.Content=rs.getString("content");
+				this.studentId=rs.getInt("studentID");
+				this.courseId=rs.getInt("courseID");
+			}
+			this.student=new Student(this.studentId);
+			this.Course=new course(this.courseId);
+		} catch (SQLException sqle) {
+			System.out.println ("SQLException: " + sqle.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException sqle) {
+				System.out.println("sqle: " + sqle.getMessage());
+			}
+		}
+	}
+	
+	public void run() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String passwords = "root"; //enter the password for your MySQL

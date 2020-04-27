@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Base64;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.sql.PreparedStatement;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -23,6 +25,18 @@ public class EntireCourse {
 	private Connection conn = null;
 	private PreparedStatement ps = null;
 	private ResultSet rs=null;
+	private ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
+	
+	public String get_name() {
+		Iterator hmiterator=courses.entrySet().iterator();
+		
+		while(hmiterator.hasNext()){
+			Map.Entry mapElement = (Map.Entry)hmiterator.next();
+			CourseProfessor cp=(CourseProfessor)mapElement.getValue();
+			return cp.get_name();
+		}
+		return "";
+	}
 	
 	public double get_overall() {
 		double total=0;
@@ -131,9 +145,16 @@ public class EntireCourse {
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				Integer key=(Integer)rs.getInt("professorID");
+				
 				if(!courses.containsKey(key)) {
-					courses.put(key, new CourseProfessor(prefix, courseNum, key));		
+					CourseProfessor cp=new CourseProfessor(prefix, courseNum, key, true);
+					courses.put(key, cp);		
+					executor.execute(cp);
 				}
+			}
+			executor.shutdown();
+			while(!executor.isTerminated()) {
+				continue;
 			}
 		} catch (SQLException sqle) {
 			System.out.println ("SQLException: " + sqle.getMessage());

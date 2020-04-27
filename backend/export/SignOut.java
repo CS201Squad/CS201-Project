@@ -1,5 +1,6 @@
 //FIX THE SALTING
 package export;
+
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -25,15 +26,12 @@ import java.util.ArrayList;
 /**
  * Servlet implementation class SignUpStu
  */
-@WebServlet("/ClassProfessor")
-public class ClassProfessor extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-    private static byte[] salt;
-    private double id;
+@WebServlet("/SignOut")
+public class SignOut extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ClassProfessor() {
+    public SignOut() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,19 +43,10 @@ public class ClassProfessor extends HttpServlet {
 		// TODO Auto-generated method stub
 		//ADD ALL THE PARAMETERS AND MAKE SURE YOU MAKE THE SALT UNIVERSAL
 		HttpSession session=request.getSession();
-		if(session.getAttribute("logged")==null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("login.html");
-            dispatcher.forward(request, response);	
-		}
-		if(!(boolean)session.getAttribute("logged")){
-			RequestDispatcher dispatcher = request.getRequestDispatcher("login.html");
-            dispatcher.forward(request, response);
-		}
-		Student s=(Student)session.getAttribute("student");
-		request.setAttribute("Student", s);
+		session.setAttribute("logged", false);
 		RequestDispatcher dispatcher =request.getRequestDispatcher("login.html");
         dispatcher.forward(request, response);	
-	} 
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -66,3 +55,4 @@ public class ClassProfessor extends HttpServlet {
 		doGet(request, response);
 	}
 }
+

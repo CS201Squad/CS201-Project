@@ -13,12 +13,14 @@ import java.util.Base64;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class SignUpPro
@@ -43,14 +45,19 @@ public class SignUpPro extends HttpServlet {
 		
 		//ADD ALL THE PARAMETERS AND MAKE SURE YOU MAKE THE SALT UNIVERSAL
 		ServletContext ctx=request.getServletContext();
+		HttpSession session=request.getSession();
 		salt=(byte[])ctx.getAttribute("salt");
 		String id = request.getParameter("id");
 		String fname = request.getParameter("first name");
 		String lname = request.getParameter("last name");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		double pID = new Double(id);
+		int pID = new Integer(id);
 		signupProfessor(pID, fname, lname, password, email);
+		session.setAttribute("isStudent", false);
+		session.setAttribute("logged", true);
+		RequestDispatcher dispatcher =request.getRequestDispatcher("ProfessorProfile?pid="+Integer.toString(pID));
+        dispatcher.forward(request, response);	
 	}
 
 	/**
@@ -61,7 +68,7 @@ public class SignUpPro extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	public static void signupProfessor(Double id, String fname, String lname, String pass, String email){
+	public static void signupProfessor(int id, String fname, String lname, String pass, String email){
 		Connection conn = null;
 		Statement ss = null;
 		ResultSet rs = null;
@@ -73,11 +80,8 @@ public class SignUpPro extends HttpServlet {
 			String passwords = "root"; //enter the password for your MySQL
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/RateSC?serverTimezone=UTC&user=root&password="+passwords);
 			ss = conn.createStatement();
-			int x = ss.executeUpdate("INSERT INTO Professor (professorID, fname, lname, email, password_hash)"
-					+ " VALUES (" + id + ", '" + fname + "', '" + lname + 
-					"', '" + email + "', '" + hashed +"');");
-			
-			
+			ss.executeUpdate("update professor set email='"+email+"', password_hash='"+hashed
+					+"'where professorID="+Integer.toString(id));	
 		} catch (SQLException sqle) {
 			System.out.println ("SQLException: " + sqle.getMessage());
 		} catch (ClassNotFoundException e) {

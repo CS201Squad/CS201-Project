@@ -29,7 +29,10 @@ import java.util.ArrayList;
 public class Reviews extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private static byte[] salt;
-    private double id;
+    private int id;
+    private Connection conn = null;
+	private PreparedStatement ps = null;
+	private ResultSet rs=null;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -53,7 +56,13 @@ public class Reviews extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.html");
             dispatcher.forward(request, response);
 		}
-		CourseProfessor cp=new CourseProfessor(request.getParameter("pre"), Integer.parseInt(request.getParameter("num")),
+		Student s=(Student)(session.getAttribute("student"));
+		
+		id=s.get_studentID();
+		boolean canReview=taken(id, request.getParameter("pre"), Integer.parseInt(request.getParameter("num")),Integer.parseInt(request.getParameter("pid")));
+		request.setAttribute("canReview", !canReview);
+		CourseProfessor cp=new CourseProfessor(request.getParameter("pre"), 
+				Integer.parseInt(request.getParameter("num")),
 				Integer.parseInt(request.getParameter("pid")));	
 		request.setAttribute("cp", cp);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Julie_Pages/cpr.jsp");
@@ -66,5 +75,40 @@ public class Reviews extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+	public boolean taken(int studentID, String prefix, int courseNum, int professorID) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String passwords = "root"; //enter the password for your MySQL
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/RateSC?serverTimezone=UTC&user=root&password="+passwords);
+			ps = conn.prepareStatement("Select * from taken where studentID="+Integer.toString(studentID)+" and professorID="
+			+Integer.toString(professorID)+" and prefix='"+prefix+"' and courseNum="+Integer.toString(courseNum)+";");
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				return false;
+			}
+			return true;
+		} catch (SQLException sqle) {
+			System.out.println ("SQLException: " + sqle.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException sqle) {
+				System.out.println("sqle: " + sqle.getMessage());
+			}
+		}
+		return true;
 	}
 }

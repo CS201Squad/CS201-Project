@@ -30,7 +30,7 @@ public class Student {
 	public String get_email() {
 		return this.email;
 	}
-	public double get_studentID() {
+	public int get_studentID() {
 		return this.studentID;
 	}
 	public Student(int ID) {

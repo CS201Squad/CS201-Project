@@ -66,7 +66,7 @@ public class ProfessorResult extends HttpServlet {
 			professors.add(p);
 		}
 		request.setAttribute("professors", professors);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("Ruchi_Pages/profs.jsp");
+		RequestDispatcher dispatcher=request.getRequestDispatcher("Ruchi_Pages/profs_new.jsp");
         dispatcher.forward(request, response);	
 	}
 	/**
@@ -88,15 +88,25 @@ public class ProfessorResult extends HttpServlet {
 			if(split.length==1) {
 				ps = conn.prepareStatement("SELECT * FROM Professor "
 						+ "WHERE fname='"+split[0]+"';");
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					ids.add(rs.getInt("professorID"));
+				}
+				
+				ps = conn.prepareStatement("SELECT * FROM Professor "
+						+ "WHERE lname='"+split[0]+"';");
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					ids.add(rs.getInt("professorID"));
+				}
 			}
 			else {
 				ps = conn.prepareStatement("SELECT * FROM Professor "
 						+ "WHERE fname='"+split[0]+"' and lname='"+split[1]+"';");
-			}
-		
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				ids.add(rs.getInt("professorID"));
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					ids.add(rs.getInt("professorID"));
+				}
 			}
 		} catch (SQLException sqle) {
 			System.out.println ("SQLException: " + sqle.getMessage());

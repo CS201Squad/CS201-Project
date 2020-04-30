@@ -54,7 +54,7 @@ public class CourseProfessor implements Runnable{
 			total+=courses.get(i).get_overall();
 			count++;
 		}
-		return total/count;
+		return Math.floor((total/count) * 100) / 100;
 	}
 	
 	public double get_clarity() {
@@ -64,7 +64,7 @@ public class CourseProfessor implements Runnable{
 			total+=courses.get(i).get_clarity();
 			count++;
 		}
-		return total/count;
+		return  Math.floor((total/count) * 100) / 100;
 	}
 	
 	public double get_difficulty() {
@@ -74,7 +74,7 @@ public class CourseProfessor implements Runnable{
 			total+=courses.get(i).get_difficulty();
 			count++;
 		}
-		return total/count;
+		return Math.floor((total/count) * 100) / 100;
 	}
 	
 	public double get_workload() {
@@ -84,7 +84,7 @@ public class CourseProfessor implements Runnable{
 			total+=courses.get(i).get_workload();
 			count++;
 		}
-		return total/count;
+		return  Math.floor((total/count) * 100) / 100;
 	}
 	
 	public Professor get_professor() {

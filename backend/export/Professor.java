@@ -31,6 +31,7 @@ public class Professor {
 	public String get_department() {
 		return this.department;
 	}
+
 	public double get_overall() {
 		double total=0;
 		double count=0;
@@ -42,7 +43,7 @@ public class Professor {
 			total+=cp.get_overall();
 			count++;
 		}
-		return total/count;
+		return  Math.floor((total/count) * 100) / 100;
 	}
 	public int get_professorID() {
 		return this.professorID;

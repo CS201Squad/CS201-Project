@@ -55,6 +55,8 @@ public class ClassProfile extends HttpServlet {
 		System.out.flush();
 		System.out.println(request.getParameter("search"));
 		EntireCourse e=new EntireCourse((String)request.getParameter("search"));
+		System.out.println(e.get_name());
+		System.out.flush();
 		request.setAttribute("entireCourse", e);
 		RequestDispatcher dispatcher =request.getRequestDispatcher("Sophia's_Pages/ClassProfile.jsp");
         dispatcher.forward(request, response);	
